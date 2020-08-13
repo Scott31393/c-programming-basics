@@ -39,6 +39,26 @@ void suf_insert(struct list *ptr, float value){
     }
 }
 
+
+void search(struct list *ptr, float value){
+    int position;
+    int found = 1;
+
+    for(position = ptr->head; position != ptr->tail; position = (position + 1) % ptr->size){
+        if(ptr->buffer[position] == value && found == 1){
+            found = 0;
+            break;
+        }else{
+            found = 1;
+        }
+    }
+
+    if(found == 0)
+        printf("Found val | val = %f \n", value);
+    if(found == 1)
+        printf("Don't Found val | val = %f \n", value);
+}
+
 int main(void){
 
     /*declare list*/
@@ -48,6 +68,7 @@ int main(void){
     int selection;
     float pre_insert_val;
     float suf_insert_val;
+    float search_val;
 
     ptr = &l;
     size = 0;
@@ -61,7 +82,7 @@ int main(void){
 
     
     while(1){
-        printf("Choose action\n 1-Pre-insert \n 2-Visit list \n 3-Suf-insert \n 4-Exit\n");
+        printf("Choose action\n 1-Pre-insert \n 2-Visit list \n 3-Suf-insert \n 4-Search\n 5-Exit\n");
         scanf("%d", &selection);
 
 
@@ -81,6 +102,11 @@ int main(void){
                 suf_insert(ptr, suf_insert_val);
                 break;
             case 4:
+                printf("Choose val to be search: \n");
+                scanf("%f", &search_val);
+                search(ptr,search_val);
+                break;
+            case 5:
                 exit(1);
             default:
                 printf("Invalid selection number\n");
