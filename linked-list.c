@@ -60,6 +60,21 @@ int search(struct list **ptrptr, float value, struct list *ptr){
 }
 
 
+int del_list_r(struct list **ptrptr){
+    int count;
+    if(*ptrptr != NULL){
+        count = del_list_r(&((*ptrptr)->next_ptr) + 1);
+        free(*ptrptr);
+        *ptrptr = NULL;
+        return count;
+    }else
+    {
+        return 0;
+    }
+    
+}
+
+
 
 int main(void){
     float value;
@@ -78,7 +93,7 @@ int main(void){
 
     while(1){
 
-        printf("Select option: \n 1-Pre-insert \n 2-Suf-insert \n 3-Visit list \n 4-Search value \n");
+        printf("Select option: \n 1-Pre-insert \n 2-Suf-insert \n 3-Visit list \n 4-Search value \n 5-Del-elem \n");
         scanf("%d", &selection);
         printf("Option selected = %d \n", selection);
 
@@ -110,6 +125,9 @@ int main(void){
             {
                 printf("Don't found \n");
             }
+            break;
+        case 5:
+            printf("Del elem n = %d \n", del_list_r(ptrptr));
             break;
         default:
             exit(1);
