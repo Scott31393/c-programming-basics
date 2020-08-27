@@ -28,7 +28,7 @@ void pre_insert(struct list **ptrptr, float value){
 
 void suf_insert( struct list **ptrptr, float value){
 
-    while((*ptrptr)->next_ptr != NULL)
+    while(*ptrptr != NULL)
         ptrptr = &((*ptrptr)->next_ptr);
     
     pre_insert(ptrptr, value);   
